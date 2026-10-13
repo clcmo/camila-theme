@@ -40,13 +40,13 @@ jobs:
     - name: 🌐 4. Preparando a Prévia Estática para o GitHub Pages
       run: |
         # Cria uma pasta temporária para a build estática
-        mkdir -p build-estatica/camila-theme
+        mkdir -p public/${{ github.event.repository.name }}
         
         # Copia apenas os arquivos HTML e assets estruturais de ./wp para a pasta da prévia
-        cp -r ./wp/*.html build-estatica/camila-theme/ 2>/dev/null || true
+        cp -r ./wp/*.html public/${{ github.event.repository.name }}/ 2>/dev/null || true
         
         # Se houver subpastas de css/js/imagens específicos da prévia, copia também:
-        if [ -d "./wp/assets" ]; then cp -r ./wp/assets build-estatica/camila-theme/; fi
+        if [ -d "./wp/assets" ]; then cp -r ./wp/assets public/${{ github.event.repository.name }}/; fi
 
     - name: 🚀 5. Publicando a Prévia Estática no GitHub Pages (dev.camilaloliveira.me)
       uses: peaceiris/actions-gh-pages@v4
