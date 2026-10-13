@@ -52,7 +52,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build-estatica
+        publish_dir: ./public/
         # Isso vai criar/atualizar a branch gh-pages automaticamente com a estrutura correta
 
 
