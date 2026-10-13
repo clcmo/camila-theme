@@ -15,7 +15,7 @@ jobs:
     - name: 🛠️ 1. Baixando o código do repositório
       uses: actions/checkout@v4
 
-    - name: 🔍 Extraindo a versão do style.css
+    - name: 🔍 2. Extraindo a versão do style.css
       id: extract_version
       run: |
         # Ajustado para buscar o style.css dentro da subpasta wp
@@ -23,12 +23,12 @@ jobs:
         if [ -z "$VERSION" ]; then VERSION="1.0.0"; fi
         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-    - name: 🌐 2. Preparando arquivos de Prévia/Mídia (Nativo)
+    - name: 🌐 3. Preparando arquivos de Prévia/Mídia (Nativo)
       run: |
         # Copia o arquivo HTML de prévia ou executa a movimentação necessária de forma nativa e segura
         cp ./wp/*.html ./ 2>/dev/null || true
 
-    - name: 🚀 3. Sincronizando arquivos com o Servidor Apache via FTP
+    - name: 🚀 4. Sincronizando arquivos com o Servidor Apache via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -37,7 +37,7 @@ jobs:
         local-dir: ./wp/
         server-dir: /public_html/wordpress/wp-content/themes/${{ github.event.repository.name }}/
 
-    - name: 🌐 4. Preparando a Prévia Estática para o GitHub Pages
+    - name: 🌐 5. Preparando a Prévia Estática para o GitHub Pages
       run: |
         # Cria uma pasta temporária para a build estática
         mkdir -p public/${{ github.event.repository.name }}
@@ -51,15 +51,17 @@ jobs:
         # ADICIONE ESTA LINHA PARA BLINDAR A LEITURA DOS ARQUIVOS MULTIMÍDIA:
         touch public/.nojekyll
 
-    - name: 🚀 5. Publicando a Prévia Estática no GitHub Pages (dev.camilaloliveira.me)
-      uses: peaceiris/actions-gh-pages@v4
+    - name: 📦 6. Empacotando Artefato do Pages
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public/
+        # Aponta para a pasta onde jogamos os HTMLs de MediaCast
+        path: ./public/
         # Isso vai criar/atualizar a branch gh-pages automaticamente com a estrutura correta
 
+    - name: 🚀 7. Publicando no GitHub Pages Nativo
+      uses: actions/deploy-pages@v4
 
-    - name: 🏷️ 6. Criando Tag de Versão e Release no GitHub
+    - name: 🏷️ 8. Criando Tag de Versão e Release no GitHub
       uses: softprops/action-gh-release@v2
       with:
         tag_name: v${{ steps.extract_version.outputs.version }}
