@@ -20,5 +20,5 @@ jobs:
           input: ./wp
           output: ./
           # A variável correta para o GitHub injetar o caminho absoluto do container:
-          workspace: ${{ github.workspace }}
+          workspace: /github/workspace
 
