@@ -1,6 +1,5 @@
 name: Deploy Automatizado do Wordpress com Controle de Versão
 
-<<<<<<< HEAD
 on:
   push:
     branches:
