@@ -13,10 +13,12 @@ jobs:
   deploy-e-versao:
     runs-on: ubuntu-latest
     steps:
-      - name: Renderizando HTML
+      - name: 🌐 Renderizando HTML Localizado
         uses: dustuu/Dustuu.Actions.RenderLocalizedHtml@0.0.4
         with:
-          # The directory to localize from (relative to workspace). Example, "path/to/source".
-          input: ./wp/
-          # The directory to localize into (relative to workspace). Example, "path/to/destination".
+          # Altere para './' se os arquivos do tema estão direto na raiz do repositório
+          input: ./wp
           output: ./
+          # A variável correta para o GitHub injetar o caminho absoluto do container:
+          workspace: ${{ github.workspace }}
+
