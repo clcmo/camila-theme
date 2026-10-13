@@ -47,6 +47,9 @@ jobs:
         
         # Se houver subpastas de css/js/imagens específicos da prévia, copia também:
         if [ -d "./wp/assets" ]; then cp -r ./wp/assets public/${{ github.event.repository.name }}/; fi
+        
+        # ADICIONE ESTA LINHA PARA BLINDAR A LEITURA DOS ARQUIVOS MULTIMÍDIA:
+        touch public/.nojekyll
 
     - name: 🚀 5. Publicando a Prévia Estática no GitHub Pages (dev.camilaloliveira.me)
       uses: peaceiris/actions-gh-pages@v4
