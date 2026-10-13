@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+# LIBERA A PERMISSÃO DE ESCRITA PARA A ESTEIRA CRIAR AS TAGS E RELEASES
+permissions:
+  contents: write
+
 jobs:
   deploy-e-versao:
     runs-on: ubuntu-latest
@@ -16,6 +20,11 @@ jobs:
       id: extract_version
       run: |
         VERSION=$(grep -i "Version:" style.css | head -n 1 | awk -F: '{print $2}' | xargs)
+        
+        if [ -z "$VERSION" ]; then
+          VERSION="1.0.0"
+        fi
+        
         echo "Versão detectada: $VERSION"
         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
@@ -26,18 +35,17 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./wp/
-        # O github.event.repository.name pega o nome exato do seu repositório no GitHub dinamicamente
-        server-dir: /public_html/wordpress/wp-content/themes/${{ github.event.repository.name }}/
+        server-dir: /public_html/wp/wp-content/themes/${{ github.event.repository.name }}/
 
-    - name: 🏷️ Criando Tag de Versão no GitHub
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: 🏷️ Criando Tag de Versão e Release no GitHub
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v${{ steps.extract_version.outputs.version }}
-        release_name: Versão v${{ steps.extract_version.outputs.version }}
+        name: Versão v${{ steps.extract_version.outputs.version }}
         body: |
           Deploy automatizado realizado com sucesso!
           Código sincronizado com a instalação Apache do WordPress.
         draft: false
         prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
