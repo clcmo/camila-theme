@@ -1,0 +1,11 @@
+/*
+Theme Name: Camila L. Oliveira
+Theme URI: https://camilaloliveira.com
+Author: Camila L. Oliveira
+Description: Tema autoral em arquitetura MVC (Models, Views, Controllers) para o site de Camila L. Oliveira — blog, livros, vídeos e sons.
+Version: 1.0.4
+Requires at least: 6.4
+Requires PHP: 7.4
+Text Domain: camila-oliveira
+*/
+/* Os estilos do tema ficam em assets/css/theme.css (carregado por app/Controllers/AssetsController.php). */

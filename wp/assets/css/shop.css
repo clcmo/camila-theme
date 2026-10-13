@@ -1,0 +1,100 @@
+.loja {
+  width: min(var(--larga), 100% - 2 * var(--respiro));
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
+}
+.loja .titulo-pagina { margin-bottom: 2rem; }
+.loja__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.loja__resultado {
+  margin: 0;
+  color: #4a453f;
+  font: 500 0.85rem/1.4 var(--sans);
+}
+.loja__toolbar .loja-filtros { margin: 0; }
+.loja__produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: 2.5rem 1.75rem;
+  align-items: start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.loja__produto { min-width: 0; }
+.loja__capa {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: var(--linho);
+}
+.loja__capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+.loja__capa:hover img { transform: scale(1.03); }
+.loja__nome {
+  font: 700 1rem/1.25 var(--sans);
+  text-transform: uppercase;
+}
+.loja__nome a { text-decoration: underline; text-underline-offset: 0.22em; }
+.loja__preco { margin-top: 0.65rem; font: 600 1rem/1.3 var(--sans); }
+.loja__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  margin-top: 0.8rem;
+  padding: 0.55rem 1rem;
+  background: var(--preto);
+  color: #fff;
+  font: 600 0.82rem/1.2 var(--sans);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.loja__cta:hover { background: var(--marca); }
+.loja__paginacao { margin-top: 3rem; }
+.loja__paginacao .page-numbers { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.loja-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+  font-family: var(--sans);
+}
+.loja-filtros__rotulo {
+  margin-right: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.loja-filtro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--fio);
+  color: var(--texto);
+  font-size: 0.82rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.loja-filtro:hover,
+.loja-filtro.is-ativo {
+  background: var(--preto);
+  color: #fff;
+}
+.loja-filtro:focus-visible {
+  outline: 2px solid var(--preto);
+  outline-offset: 3px;
+}

@@ -1,0 +1,29 @@
+/* ---------- Formulário ---------- */
+.formulario {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.formulario label {
+  font: 700 0.85rem var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.75rem;
+}
+.formulario input,
+.formulario textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font: 400 1rem var(--serif);
+  border: 1px solid var(--campo-borda);
+  background: var(--campo);
+  border-radius: 0;
+}
+.formulario .botao {
+  justify-self: start;
+  margin-top: 1.25rem;
+  font: 700 0.9rem var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+

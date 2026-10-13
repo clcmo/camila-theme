@@ -1,0 +1,173 @@
+/* ---------- Capa da home ---------- */
+.capa {
+  padding: clamp(1rem, 4vw, 3rem) 0.75rem 0;
+}
+.marca--capa {
+  width: min(46rem, 88%);
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+.capa__foto {
+  margin: 0;
+}
+.capa__foto img {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+/* ---------- Newsletter ---------- */
+.newsletter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 3rem;
+  width: min(60rem, 100% - 2 * var(--respiro));
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto;
+}
+.newsletter h2 {
+  font-size: 1.05rem;
+  flex: 1 1 18rem;
+  max-width: 26rem;
+}
+.newsletter__form {
+  display: flex;
+  gap: 0.6rem;
+  flex: 1 1 22rem;
+  max-width: 30rem;
+}
+.newsletter__form input[type="email"] {
+  flex: 1;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  font: 400 1rem var(--sans);
+  background: var(--campo);
+  border: 1px solid var(--campo-borda);
+  border-radius: 0;
+}
+.newsletter__form button,
+.botao {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: var(--preto);
+  color: #fff;
+  cursor: pointer;
+  padding: 0.9rem 1.4rem;
+  font: 400 1rem var(--serif);
+  transition: background 0.2s;
+}
+.newsletter__form button:hover,
+.botao:hover {
+  background: #3a3631;
+}
+  border-color: #9b2c2c;
+}
+
+/* ---------- Vitrines da home e coleções ---------- */
+.vitrine,
+.colecao {
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+}
+.vitrine {
+  width: min(var(--larga), 100% - 2 * var(--respiro));
+  margin-inline: auto;
+}
+.vitrine__cab {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--fio);
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+.vitrine__cab h2,
+.colecao__titulo {
+  font-size: 1.05rem;
+}
+.colecao__titulo {
+  margin-bottom: 1.75rem;
+}
+.vitrine__ver {
+  font: 500 0.85rem var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.vitrine__ver:hover {
+  border-bottom-width: 2px;
+}
+
+.livros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  gap: 2.5rem 1.75rem;
+  align-items: start;
+}
+.livro__capa {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #e9e4dd;
+  margin-bottom: 1rem;
+}
+.livro__capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.livro__capa:hover img {
+  transform: scale(1.03);
+}
+.livro__titulo {
+  font: 700 1rem/1.25 var(--sans);
+  text-transform: uppercase;
+}
+.livro__titulo a {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 2px;
+}
+.livro__meta {
+  font-size: 0.98rem;
+  margin-top: 0.3rem;
+  color: #4a453f;
+}
+.compra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+.botao-contorno {
+  display: inline-block;
+  padding: 0.38rem 0.85rem;
+  border: 1px solid var(--preto);
+  font: 500 0.78rem/1.2 var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.botao-contorno:hover {
+  background: var(--preto);
+  color: #fff;
+}
+
+.livro-pagina {
+  display: grid;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  gap: 3rem;
+  width: min(var(--larga), 100% - 2 * var(--respiro));
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
+}
+.livro-pagina .titulo-pagina {
+  margin-bottom: 1rem;
+}
+
