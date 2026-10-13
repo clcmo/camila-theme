@@ -17,7 +17,7 @@ jobs:
         uses: dustuu/Dustuu.Actions.RenderLocalizedHtml@0.0.4
         with:
           # Altere para './' se os arquivos do tema estão direto na raiz do repositório
-          input: ./wp
+          input: ./wp/
           output: ./
           # A variável correta para o GitHub injetar o caminho absoluto do container:
           workspace: /github/workspace
