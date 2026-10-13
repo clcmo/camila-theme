@@ -1,0 +1,26 @@
+name: Render Localized HTML
+
+on:
+  push:
+    branches:
+      - main
+
+# LIBERA A PERMISSÃO DE ESCRITA PARA A ESTEIRA CRIAR AS TAGS E RELEASES
+permissions:
+  contents: write
+
+jobs:
+  deploy-e-versao:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Renderizando HTML
+        uses: dustuu/Dustuu.Actions.RenderLocalizedHtml@0.0.4
+        with:
+          # The workspace directory.
+          #workspace: # optional, default is /github/workspace
+          # The .json file to use for translation (relative to workspace). Example, "translations.json".
+          #translation: 
+          # The directory to localize from (relative to workspace). Example, "path/to/source".
+          input: ./wp/
+          # The directory to localize into (relative to workspace). Example, "path/to/destination".
+          output: ./
