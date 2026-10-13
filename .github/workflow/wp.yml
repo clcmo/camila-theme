@@ -1,22 +1,45 @@
-name: Deploy do Tema WordPress Online
+name: Deploy Automatizado do Wordpress com Controle de Versão
 
+<<<<<<< HEAD
 on:
   push:
     branches:
-      - main  # Executa a automação sempre que você atualizar a branch principal
+      - main
 
 jobs:
-  deploy-arquivos:
+  deploy-e-versao:
     runs-on: ubuntu-latest
     steps:
     - name: 🛠️ Baixando o código do repositório
       uses: actions/checkout@v4
 
-    - name: 🚀 Sincronizando com o servidor via FTP
+    - name: 🔍 Extraindo a versão do style.css
+      id: extract_version
+      run: |
+        # Busca a linha "Version:" no style.css, limpa espaços e isola o número
+        VERSION=$(grep -i "Version:" style.css | head -n 1 | awk -F: '{print $2}' | xargs)
+        echo "Versão detectada: $VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: 🚀 Sincronizando arquivos com o Servidor Apache via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./wp  # Envia tudo o que estiver na pasta do repositório
-        server-dir: /public_html/wp-content/themes/wp  # Caminho exato na sua hospedagem
+        local-dir: ./wp
+        # Substitua pelo nome exato da pasta do seu tema no host remoto
+        server-dir: /public_html/wp/wp-content/themes/wp/
+
+    - name: 🏷️ Criando Tag de Versão no GitHub
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Gerado automaticamente pelo GitHub
+      with:
+        tag_name: v${{ steps.extract_version.outputs.version }}
+        release_name: Versão v${{ steps.extract_version.outputs.version }}
+        body: |
+          Deploy automatizado realizado com sucesso!
+          Código sincronizado com a instalação Apache do WordPress.
+        draft: false
+        prerelease: false
