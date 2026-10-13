@@ -1,4 +1,4 @@
-name: Deploy Automatizado do Wordpress com Controle de Versão
+name: Deploy Automatizado com Controle de Versão
 
 on:
   push:
@@ -15,7 +15,6 @@ jobs:
     - name: 🔍 Extraindo a versão do style.css
       id: extract_version
       run: |
-        # Busca a linha "Version:" no style.css, limpa espaços e isola o número
         VERSION=$(grep -i "Version:" style.css | head -n 1 | awk -F: '{print $2}' | xargs)
         echo "Versão detectada: $VERSION"
         echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -26,14 +25,14 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./wp
-        # Substitua pelo nome exato da pasta do seu tema no host remoto
-        server-dir: /public_html/wp/wp-content/themes/wp/
+        local-dir: ./wp/
+        # O github.event.repository.name pega o nome exato do seu repositório no GitHub dinamicamente
+        server-dir: /public_html/wordpress/wp-content/themes/${{ github.event.repository.name }}/
 
     - name: 🏷️ Criando Tag de Versão no GitHub
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Gerado automaticamente pelo GitHub
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v${{ steps.extract_version.outputs.version }}
         release_name: Versão v${{ steps.extract_version.outputs.version }}
