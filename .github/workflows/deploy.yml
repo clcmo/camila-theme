@@ -50,7 +50,7 @@ jobs:
         if [ -d "./wp/assets" ]; then cp -r ./wp/assets public/${{ github.event.repository.name }}/; fi
         
         # INDISPENSÁVEL: Recria o arquivo CNAME na raiz do artefato para o subdomínio não cair
-        echo "dev.camilaloliveira.me" > public/CNAME
+        echo "theme.camilaloliveira.me" > public/CNAME
         
         # Desativa o Jekyll para evitar quebra de arquivos do WordPress
         touch public/.nojekyll
