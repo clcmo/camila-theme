@@ -1,0 +1,22 @@
+name: Deploy do Tema WordPress Online
+
+on:
+  push:
+    branches:
+      - main  # Executa a automação sempre que você atualizar a branch principal
+
+jobs:
+  deploy-arquivos:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🛠️ Baixando o código do repositório
+      uses: actions/checkout@v4
+
+    - name: 🚀 Sincronizando com o servidor via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./wp  # Envia tudo o que estiver na pasta do repositório
+        server-dir: /public_html/wp-content/themes/wp  # Caminho exato na sua hospedagem

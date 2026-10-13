@@ -1,0 +1,15 @@
+# Arquivos de sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Dependências locais (caso use compiladores como Sass ou NPM para o tema)
+node_modules/
+dist/
+npm-debug.log*
+
+# Arquivos de backup que o WordPress ou editores criam às vezes
+*.bak
+*.swp
