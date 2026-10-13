@@ -20,14 +20,12 @@ jobs:
     - name: 🔍 2. Extraindo a versão do style.css
       id: extract_version
       run: |
-        # Ajustado para buscar o style.css dentro da subpasta wp
         VERSION=$(grep -i "Version:" ./wp/style.css | head -n 1 | awk -F: '{print $2}' | xargs)
         if [ -z "$VERSION" ]; then VERSION="1.0.0"; fi
         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
     - name: 🌐 3. Preparando arquivos de Prévia/Mídia (Nativo)
       run: |
-        # Copia o arquivo HTML de prévia ou executa a movimentação necessária de forma nativa e segura
         cp ./wp/*.html ./ 2>/dev/null || true
 
     - name: 🚀 4. Sincronizando arquivos com o Servidor Apache via FTP
@@ -41,24 +39,26 @@ jobs:
 
     - name: 🌐 5. Preparando a Prévia Estática para o GitHub Pages
       run: |
-        # Cria uma pasta temporária para a build estática
+        # Garante a limpeza de compilações órfãs locais na VM
+        rm -rf public
         mkdir -p public/${{ github.event.repository.name }}
         
-        # Copia apenas os arquivos HTML e assets estruturais de ./wp para a pasta da prévia
+        # Copia os arquivos HTML de prévia para a subpasta dinâmica
         cp -r ./wp/*.html public/${{ github.event.repository.name }}/ 2>/dev/null || true
         
-        # Se houver subpastas de css/js/imagens específicos da prévia, copia também:
+        # Copia a pasta de assets (CSS/JS) para dentro da subpasta dinâmica
         if [ -d "./wp/assets" ]; then cp -r ./wp/assets public/${{ github.event.repository.name }}/; fi
         
-        # ADICIONE ESTA LINHA PARA BLINDAR A LEITURA DOS ARQUIVOS MULTIMÍDIA:
+        # INDISPENSÁVEL: Recria o arquivo CNAME na raiz do artefato para o subdomínio não cair
+        echo "dev.camilaloliveira.me" > public/CNAME
+        
+        # Desativa o Jekyll para evitar quebra de arquivos do WordPress
         touch public/.nojekyll
 
     - name: 📦 6. Empacotando Artefato do Pages
       uses: actions/upload-pages-artifact@v3
       with:
-        # Aponta para a pasta onde jogamos os HTMLs de MediaCast
         path: ./public/
-        # Isso vai criar/atualizar a branch gh-pages automaticamente com a estrutura correta
 
     - name: 🚀 7. Publicando no GitHub Pages Nativo
       uses: actions/deploy-pages@v4
@@ -67,10 +67,10 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: v${{ steps.extract_version.outputs.version }}
-        name: Versão v${{ secrets.FTP_SERVER != '' && steps.extract_version.outputs.version }}
+        name: Versão v${{ steps.extract_version.outputs.version }}
         body: |
           Deploy de Tema Multimídia realizado com sucesso!
-          Código e prévias sincronizados no servidor Apache.
+          Código e prévias sincronizados no servidor Apache e GitHub Pages.
         draft: false
         prerelease: false
       env:
