@@ -16,10 +16,6 @@ jobs:
       - name: Renderizando HTML
         uses: dustuu/Dustuu.Actions.RenderLocalizedHtml@0.0.4
         with:
-          # The workspace directory.
-          #workspace: # optional, default is /github/workspace
-          # The .json file to use for translation (relative to workspace). Example, "translations.json".
-          #translation: 
           # The directory to localize from (relative to workspace). Example, "path/to/source".
           input: ./wp/
           # The directory to localize into (relative to workspace). Example, "path/to/destination".
