@@ -1,0 +1,72 @@
+/* ---------- Lista do blog (linhas com fio e imagem à direita) ---------- */
+.linha {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  border-top: 1px solid var(--fio);
+  min-height: 10.5rem;
+}
+.linha__texto {
+  padding: 1.4rem 1.1rem 1.1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+.linha__titulo {
+  font: 700 1.2rem/1.2 var(--sans);
+  text-transform: uppercase;
+}
+.linha__titulo a {
+  text-decoration: none;
+}
+.linha__titulo a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.linha__seta {
+  font-size: 0.95rem;
+}
+.linha__imagem {
+  display: block;
+  overflow: hidden;
+  background: #e9e4dd;
+}
+.linha__imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.linha:hover .linha__imagem img {
+  transform: scale(1.03);
+}
+.linha__imagem--vazia {
+  display: grid;
+  place-items: center;
+  background: var(--linho);
+}
+.linha__imagem--vazia .monograma {
+  width: 3.5rem;
+  opacity: 0.55;
+}
+.paginacao {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  margin-top: 3rem;
+  font: 700 1.1rem var(--sans);
+  text-transform: uppercase;
+}
+.paginacao a,
+.paginacao .current {
+  text-decoration: none;
+}
+.paginacao .current {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.paginacao__proxima {
+  text-decoration: underline !important;
+  text-underline-offset: 0.25em;
+}
+

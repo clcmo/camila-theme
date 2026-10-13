@@ -1,0 +1,125 @@
+/* ---------- Vídeos ---------- */
+.videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 2rem 1.5rem;
+}
+.videos--pagina {
+  width: min(var(--larga), 100% - 2 * var(--respiro));
+  margin-inline: auto;
+}
+.video__quadro {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #1d1b19;
+  overflow: hidden;
+}
+.video__quadro img,
+.video__quadro iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+}
+.video__botao {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  background: var(--preto);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.video__botao svg {
+  transform: translateX(2px);
+}
+.video__quadro:hover .video__botao {
+  transform: scale(1.08);
+  background: var(--marca);
+}
+.video__titulo {
+  font: 700 0.95rem/1.3 var(--sans);
+  text-transform: uppercase;
+  margin-top: 0.85rem;
+}
+
+/* ---------- Sons ---------- */
+.sons {
+  width: 100%;
+}
+.sons--pagina {
+  width: min(var(--medida) + 6rem, 100% - 2 * var(--respiro));
+  margin-inline: auto;
+}
+.som {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--fio);
+}
+.som:last-child {
+  border-bottom: 1px solid var(--fio);
+}
+.vitrine__cab + .sons .som:first-child {
+  border-top: 0;
+}
+.som__botao {
+  appearance: none;
+  border: 0;
+  width: 3rem;
+  height: 3rem;
+  background: var(--preto);
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s;
+}
+.som__botao:hover {
+  background: var(--marca);
+}
+.som__botao .icone-pausa,
+.som.tocando .som__botao .icone-play {
+  display: none;
+}
+.som.tocando .som__botao .icone-pausa {
+  display: block;
+}
+.som__titulo {
+  font: 700 1rem/1.25 var(--sans);
+  text-transform: uppercase;
+}
+.som__descricao {
+  font-size: 0.95rem;
+  color: #4a453f;
+  margin-top: 0.15rem;
+}
+.som__barra {
+  height: 2px;
+  background: #d8d2c9;
+  margin-top: 0.8rem;
+  overflow: hidden;
+}
+.som__barra i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--preto);
+}
+.som__tempo {
+  font: 500 0.9rem var(--sans);
+  font-variant-numeric: tabular-nums;
+}
+

@@ -1,0 +1,12 @@
+Fonte da marca: Centers George
+------------------------------
+1. Copie o arquivo da fonte para esta pasta com um destes nomes:
+     CentersGeorge.woff2   (preferido)
+     CentersGeorge.otf
+2. Confira a licença da fonte: ela precisa permitir uso na web (@font-face).
+3. Para exibir a marca como TEXTO em vez do SVG, troque em
+   app/Views/partials/brand.php a classe "marca--capa" por "marca--capa marca--tipografica"
+   (o mesmo vale para "marca--rodape"). Os efeitos de brilho continuam por CSS.
+
+A marca em SVG (assets/img/marca-camila.svg e monograma-ca.svg) continua disponível
+e é o padrão do tema.
