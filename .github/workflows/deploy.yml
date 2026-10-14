@@ -39,21 +39,21 @@ jobs:
 
     - name: 🌐 5. Preparando a Prévia Estática para o GitHub Pages
       run: |
-        # Garante a limpeza de compilações órfãs locais na VM
+        run: |
         rm -rf public
-        mkdir -p public/${{ github.event.repository.name }}
+        mkdir -p public
         
-        # Copia os arquivos HTML de prévia para a subpasta dinâmica
-        cp -r ./wp/*.html public/${{ github.event.repository.name }}/ 2>/dev/null || true
+        # Copia os arquivos HTML direto para a raiz do subdomínio
+        cp -r ./wp/*.html public/ 2>/dev/null || true
         
-        # Copia a pasta de assets (CSS/JS) para dentro da subpasta dinâmica
-        if [ -d "./wp/assets" ]; then cp -r ./wp/assets public/${{ github.event.repository.name }}/; fi
+        # Copia a pasta de assets (CSS/JS) direto para a raiz se ela existir
+        if [ -d "./wp/assets" ]; then cp -r ./wp/assets public/; fi
         
-        # INDISPENSÁVEL: Recria o arquivo CNAME na raiz do artefato para o subdomínio não cair
-        echo "theme.camilaloliveira.com" > public/CNAME
-        
-        # Desativa o Jekyll para evitar quebra de arquivos do WordPress
+        # Blinda o Jekyll
         touch public/.nojekyll
+
+        # Alinha com o seu novo subdomínio .com
+        echo "theme.camilaloliveira.com" > public/CNAME
 
     - name: 📦 6. Empacotando Artefato do Pages
       uses: actions/upload-pages-artifact@v3
